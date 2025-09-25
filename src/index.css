@@ -1,0 +1,212 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* UNO-themed color palette */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 98%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 98%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 0 72% 51%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 47 96% 53%;
+    --secondary-foreground: 240 10% 3.9%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 142 76% 36%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 0 72% 51%;
+
+    --radius: 1rem;
+
+    /* UNO game colors */
+    --uno-red: 0 72% 51%;
+    --uno-yellow: 47 96% 53%;
+    --uno-green: 142 76% 36%;
+    --uno-blue: 221 83% 53%;
+    
+    /* Game specific colors */
+    --game-bg: 240 10% 8%;
+    --card-back: 240 9% 12%;
+    --correct: 142 76% 36%;
+    --incorrect: 0 72% 51%;
+    --timer: 25 95% 53%;
+    
+    /* Gradients */
+    --gradient-uno: linear-gradient(135deg, hsl(var(--uno-red)), hsl(var(--uno-yellow)), hsl(var(--uno-green)), hsl(var(--uno-blue)));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(240 5.9% 96%));
+    --shadow-card: 0 10px 30px -10px hsl(240 10% 3.9% / 0.3);
+    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.4);
+
+    --radius: 1rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 8%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 8%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 72% 51%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 47 96% 53%;
+    --secondary-foreground: 240 10% 3.9%;
+
+    --muted: 240 10% 8%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 142 76% 36%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 10% 15%;
+    --input: 240 10% 15%;
+    --ring: 0 72% 51%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background: hsl(var(--game-bg));
+  }
+}
+
+@layer components {
+  /* Card animations */
+  .card-flip {
+    @apply transition-transform duration-700 transform-gpu;
+    transform-style: preserve-3d;
+  }
+  
+  .card-flip.flipped {
+    transform: rotateY(180deg);
+  }
+  
+  .card-face {
+    @apply absolute inset-0 w-full h-full backface-hidden;
+  }
+  
+  .card-back {
+    transform: rotateY(180deg);
+  }
+  
+  /* UNO card styles */
+  .uno-card {
+    @apply relative w-32 h-44 rounded-2xl cursor-pointer transition-all duration-300;
+    box-shadow: var(--shadow-card);
+  }
+  
+  .uno-card:hover {
+    @apply scale-105;
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .uno-card-red {
+    background: linear-gradient(145deg, hsl(var(--uno-red)), hsl(0 72% 45%));
+  }
+  
+  .uno-card-yellow {
+    background: linear-gradient(145deg, hsl(var(--uno-yellow)), hsl(47 96% 47%));
+  }
+  
+  .uno-card-green {
+    background: linear-gradient(145deg, hsl(var(--uno-green)), hsl(142 76% 30%));
+  }
+  
+  .uno-card-blue {
+    background: linear-gradient(145deg, hsl(var(--uno-blue)), hsl(221 83% 47%));
+  }
+  
+  .uno-card-back {
+    background: linear-gradient(145deg, hsl(var(--card-back)), hsl(240 9% 8%));
+    border: 2px solid hsl(var(--border));
+  }
+  
+  /* Timer styles */
+  .timer-ring {
+    @apply transition-all duration-1000 ease-linear;
+  }
+  
+  /* Pulse animation for correct answers */
+  .correct-pulse {
+    animation: correct-pulse 0.6s ease-out;
+  }
+  
+  .incorrect-shake {
+    animation: incorrect-shake 0.5s ease-out;
+  }
+}
+
+@layer utilities {
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}
+
+@keyframes correct-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); background-color: hsl(var(--correct) / 0.2); }
+  100% { transform: scale(1); }
+}
+
+@keyframes incorrect-shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
